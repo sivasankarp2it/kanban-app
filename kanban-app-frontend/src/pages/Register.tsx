@@ -1,23 +1,66 @@
 import { useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { registerUser } from '../redux/slices/authSlice'
-import { TextField, Button } from '@mui/material'
+import { TextField, Button, Typography, Stack, Paper, Link } from '@mui/material'
+import { useNavigate } from 'react-router-dom'
 
 export default function Register() {
-  const [form, setForm] = useState<any>({ name: '', email: '', password: '' })
+  const [form, setForm] = useState({ name: '', email: '', password: '' })
   const dispatch = useDispatch<any>()
+  const navigate = useNavigate()
 
-  const handleSubmit = () => {
-    dispatch(registerUser(form))
+  const handleSubmit = async () => {
+    if (!form.name || !form.email || !form.password) return // simple client validation
+    const result = await dispatch(registerUser(form))
+    if (result.meta.requestStatus === 'fulfilled') {
+      navigate('/login')
+    }
   }
 
   return (
-    <div className="p-4 max-w-md mx-auto">
-      <h2 className="text-2xl mb-4">Register</h2>
-      <TextField fullWidth label="Name" className="mb-2" onChange={e => setForm({ ...form, name: e.target.value })} />
-      <TextField fullWidth label="Email" className="mb-2" onChange={e => setForm({ ...form, email: e.target.value })} />
-      <TextField fullWidth label="Password" type="password" className="mb-4" onChange={e => setForm({ ...form, password: e.target.value })} />
-      <Button fullWidth variant="contained" onClick={handleSubmit}>Register</Button>
-    </div>
+    <Paper elevation={4} sx={{ maxWidth: 400, mx: "auto", mt: 8, p: 4, borderRadius: 2 }}>
+      <Typography variant="h4" component="h1" gutterBottom align="center">
+        Register
+      </Typography>
+
+      <Stack spacing={3}>
+        <TextField
+          label="Name"
+          required
+          fullWidth
+          value={form.name}
+          onChange={e => setForm({ ...form, name: e.target.value })}
+        />
+
+        <TextField
+          label="Email"
+          type="email"
+          required
+          fullWidth
+          value={form.email}
+          onChange={e => setForm({ ...form, email: e.target.value })}
+        />
+
+        <TextField
+          label="Password"
+          type="password"
+          required
+          fullWidth
+          value={form.password}
+          onChange={e => setForm({ ...form, password: e.target.value })}
+        />
+
+        <Button variant="contained" size="large" fullWidth onClick={handleSubmit}>
+          Register
+        </Button>
+
+        <Typography align="center" variant="body2">
+          Already have an account?{' '}
+          <Link href="/login" underline="hover">
+            Login here
+          </Link>
+        </Typography>
+      </Stack>
+    </Paper>
   )
 }

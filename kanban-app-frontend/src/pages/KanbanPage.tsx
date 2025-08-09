@@ -33,6 +33,7 @@ import {
 } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { DragDropContext, Droppable, Draggable } from "@hello-pangea/dnd";
+import StackBox from "../components/StackBox";
 
 export default function KanbanPage() {
   const dispatch = useDispatch<any>();
@@ -182,8 +183,9 @@ export default function KanbanPage() {
     <Box display="flex" height="100vh">
       {/* Left: workspaces */}
       <Box p={2} borderRight="1px solid #ddd" width={300} minWidth={260}>
-        <Typography variant="h6">Workspaces</Typography>
-
+        <Typography variant="h6">
+          Workspaces
+        </Typography>
         <Box display="flex" gap={1} mt={2}>
           <TextField
             size="small"
@@ -197,7 +199,7 @@ export default function KanbanPage() {
           </Button>
         </Box>
 
-        <List sx={{ mt: 2 }}>
+        <List sx={{ mt: 2, minHeight: '72vh', maxHeight: '72vh'}}>
           {workspaces.map((ws: any) => (
             <ListItem
               key={ws._id}
@@ -219,6 +221,8 @@ export default function KanbanPage() {
             </ListItem>
           ))}
         </List>
+
+        <StackBox/>
       </Box>
 
       {/* Main area: boards as columns + tasks */}
