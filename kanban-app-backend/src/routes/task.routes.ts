@@ -3,16 +3,17 @@ import { auth } from '../middlewares/auth.middleware';
 import {
   createTask,
   getTasksByBoard,
-  getTask,
+  getTaskById,
   updateTask,
   deleteTask
 } from '../controllers/task.controller';
 
 const router = Router();
 
+// Create task
 router.post('/', auth, createTask);
 router.get('/:boardId', auth, getTasksByBoard);
-router.get('/details/:taskId', auth, getTask);
+router.get('/:taskId', auth, getTaskById);
 router.put('/:taskId', auth, updateTask);
 router.delete('/:taskId', auth, deleteTask);
 

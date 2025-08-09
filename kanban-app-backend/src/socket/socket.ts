@@ -9,14 +9,14 @@ export const setupSocket = (server: Server) => {
   });
 
   io.on('connection', (socket) => {
-    console.log('User connected', socket.id);
+    console.log('User connected:', socket.id);
 
-    socket.on('joinBoard', (boardId) => {
-      socket.join(boardId);
+    socket.on('joinWorkspace', (workspaceId) => {
+      socket.join(`workspace:${workspaceId}`);
     });
 
-    socket.on('moveCard', ({ boardId, card }) => {
-      socket.to(boardId).emit('cardMoved', card);
+    socket.on('joinBoard', (boardId) => {
+      socket.join(`board:${boardId}`);
     });
 
     socket.on('disconnect', () => {

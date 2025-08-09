@@ -1,8 +1,7 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import Register from './pages/Register'
 import Login from './pages/Login'
-import WorkspacePage from './pages/WorkspacePage'
-import BoardViewPage from './pages/BoardViewPage'
+import KanbanPage from './pages/KanbanPage'
 
 export default function App() {
   return (
@@ -10,8 +9,7 @@ export default function App() {
       <Routes>
         <Route path="/" element={<Login />} />
         <Route path="/register" element={<Register />} />
-        <Route path="/workspaces" element={<WorkspacePage />} />
-        <Route path="/workspace/:workspaceId" element={<BoardViewPage />} />
+        <Route path="/workspaces" element={<KanbanPage />} />
       </Routes>
     </Router>
   )

@@ -10,10 +10,10 @@ import { auth } from '../middlewares/auth.middleware';
 
 const router = Router();
 
-router.post('/', auth, createWorkspace);            // Create
-router.get('/', auth, getMyWorkspaces);             // Read All (User-specific)
-router.get('/:id', auth, getWorkspaceById);         // Read One
-router.put('/:id', auth, updateWorkspace);          // Update
-router.delete('/:id', auth, deleteWorkspace);       // Delete
+router.post('/', auth, createWorkspace);
+router.get('/', auth, getMyWorkspaces);
+router.get('/:id', auth, getWorkspaceById);
+router.put('/:id', auth, updateWorkspace);
+router.delete('/:id', auth, deleteWorkspace);
 
 export default router;
